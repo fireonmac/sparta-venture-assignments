@@ -1,0 +1,1 @@
+const winningLottoNumbers = [9, 19, 29, 35, 37, 38];
