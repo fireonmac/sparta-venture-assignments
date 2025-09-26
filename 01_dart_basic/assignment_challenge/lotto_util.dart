@@ -20,22 +20,17 @@ int? getLottoRank(int matchCount) {
   }
 }
 
-T pickRandomElementFromList<T>(List<T> list) {
-  return list[Random().nextInt(list.length)];
-}
-
 int countMatches(List<int> list1, List<int> list2) {
   return list1.toSet().intersection(list2.toSet()).length;
 }
 
 List<int> getLottoNumbers([int limit = 45, int count = 6]) {
-  var availableNumbers = List.generate(limit, (index) => index + 1);
-  List<int> pickedNumbers = [];
-  while (pickedNumbers.length < count) {
-    var nextPick = pickRandomElementFromList(availableNumbers);
-    if (!pickedNumbers.contains(nextPick)) {
-      pickedNumbers.add(nextPick);
+  Set<int> picked = Set();
+  while (picked.length < count) {
+    var nextPick = Random().nextInt(limit) + 1;
+    if (!picked.contains(nextPick)) {
+      picked.add(nextPick);
     }
   }
-  return pickedNumbers;
+  return picked.toList();
 }
