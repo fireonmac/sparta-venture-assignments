@@ -15,6 +15,8 @@ int? getLottoRank(int matchCount) {
       return 1;
     case 4:
       return 2;
+    case 3:
+      return 3;
     default:
       return null;
   }
