@@ -5,7 +5,13 @@ class StudentScore extends Score {
 
   StudentScore({required super.point, required this.name});
 
-  void showInfo() { 
-    print('이름: $name, 점수: $point');
+  @override
+  void showInfo() {
+    print(toString());
+  }
+
+  @override
+  String toString() {
+    return '이름: $name, 점수: $point';
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:dart_advanced/assignment_1.dart' as assignment1;
 import 'package:dart_advanced/assignment_2.dart' as assignment2;
-import 'package:dart_advanced/assignment_3.dart' as assignment3;
 
 void main() {
   print('''
@@ -18,9 +17,6 @@ void main() {
       return;
     case 2:
       assignment2.solution();
-      return;
-    case 3:
-      assignment3.solution();
       return;
     default:
       print('번호를 잘못 입력하셨습니다.');
