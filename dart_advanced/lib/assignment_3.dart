@@ -5,7 +5,7 @@ import 'package:dart_advanced/student_score_model.dart';
 import 'package:dart_advanced/student_util.dart';
 
 void solution() {
-  var data = loadFile('students.txt');
+  var data = FileUtil.loadFile('students.txt');
   var scores = parseStudentScoresData(data);
 
   void promptMenu() {
