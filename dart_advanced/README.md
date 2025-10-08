@@ -23,7 +23,8 @@ dart_advanced/
 │   ├── assignment_2.dart       # 도전과제: 학생들 중 우수생을 출력하는 기능, 전체 평균 점수를 출력하는 기능
 │   ├── score_model.dart        # 점수 모델 (기본 클래스)
 │   ├── student_score_model.dart # 학생 점수 모델 (상속)
-│   ├── file_util.dart          # 파일 입출력 유틸 클래스
-│   └── student_score_manager.dart       # 학생 점수 기능을 관리하는 클래스
-└── students.txt                # 학생 데이터 파일
+│   ├── file_util.dart          # 파일 입출력 클래스
+│   └── student_score_manager.dart       # 학생 점수 관리 클래스
+└── students.txt                # 학생 점수 데이터 파일
 ```
+
