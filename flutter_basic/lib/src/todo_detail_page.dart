@@ -70,15 +70,15 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.short_text_rounded),
-                    SizedBox(width: 10),
+                    const Icon(Icons.short_text_rounded),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 2),
+                          const SizedBox(height: 2),
                           Text('세부 내용은 다음과 같습니다.'),
-                          SizedBox(height: 30),
+                          const SizedBox(height: 30),
                           TextField(
                             controller: _descriptionController,
                             maxLines: null,
