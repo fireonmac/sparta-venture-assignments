@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/src/constants.dart';
 import 'package:flutter_basic/src/styles.dart';
+import 'package:flutter_basic/src/todo_detail_page.dart';
 import 'package:flutter_basic/src/todo_entity.dart';
 import 'package:flutter_basic/src/todos_provider.dart';
 
@@ -65,6 +66,13 @@ class _TodosListItemView extends StatelessWidget {
           icon: Icon(todo.isFavorite ? Icons.star : Icons.star_border),
           onPressed: () => todosNotifier.toggleIsFavorite(index),
         ),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TodoDetailPage(index: index),
+            ),
+          );
+        },
       ),
     );
   }
