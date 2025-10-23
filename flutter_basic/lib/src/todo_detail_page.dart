@@ -46,6 +46,7 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
           appBar: AppBar(
             actions: [
               IconButton(
+                color: todo.isFavorite ? Styles.accentColor[200] : null,
                 icon: Icon(todo.isFavorite ? Icons.star : Icons.star_border),
                 onPressed: () {
                   todosNotifier.toggleIsFavorite(widget.index);
@@ -138,7 +139,10 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                   todosNotifier.remove(widget.index);
                 }
               },
-              child: const Text('삭제', style: TextStyle(color: Colors.red)),
+              child: const Text(
+                '삭제',
+                style: TextStyle(color: Styles.errorColor),
+              ),
             ),
           ],
         );

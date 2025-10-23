@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/src/constants.dart';
 import 'package:flutter_basic/src/home/home_page.dart';
+import 'package:flutter_basic/src/styles.dart';
 import 'package:flutter_basic/src/todos_provider.dart';
 import 'package:flutter_basic/src/todos_notifier.dart';
 
@@ -25,7 +26,14 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: appTitle,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Styles.primaryColor,
+            primary: Styles.primaryColor,
+            secondary: Styles.secondaryColor,
+            error: Styles.errorColor,
+          ),
+          primarySwatch: Styles.primaryColor,
+          useMaterial3: true,
         ),
         home: const HomePage(),
       ),

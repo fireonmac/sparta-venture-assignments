@@ -15,14 +15,6 @@ class _AddTodoViewState extends State<AddTodoView> {
   bool _showDescription = false;
 
   @override
-  void initState() {
-    super.initState();
-    _titleController.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();

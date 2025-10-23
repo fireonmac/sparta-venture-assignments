@@ -17,6 +17,7 @@ class HomePage extends StatelessWidget {
         child: const TodosView(),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Styles.primaryColor,
         onPressed: () {
           showModalBottomSheet(
             context: context,

@@ -58,11 +58,13 @@ class _TodosListItemView extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             todo.isDone ? Icons.check_circle : Icons.radio_button_unchecked,
+            color: todo.isDone ? Styles.secondaryColor[300] : null,
           ),
           onPressed: () => todosNotifier.toggleIsDone(index),
         ),
         title: Text(todo.title, style: TextStyle()),
         trailing: IconButton(
+          color: todo.isFavorite ? Styles.accentColor[200] : null,
           icon: Icon(todo.isFavorite ? Icons.star : Icons.star_border),
           onPressed: () => todosNotifier.toggleIsFavorite(index),
         ),
