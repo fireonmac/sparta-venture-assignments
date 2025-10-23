@@ -4,8 +4,8 @@ import 'package:flutter_basic/src/styles.dart';
 import 'package:flutter_basic/src/todo_entity.dart';
 import 'package:flutter_basic/src/todos_provider.dart';
 
-class TasksView extends StatelessWidget {
-  const TasksView({super.key});
+class TodosView extends StatelessWidget {
+  const TodosView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,23 +17,23 @@ class TasksView extends StatelessWidget {
         final todos = todosNotifier.todos;
 
         return todos.isEmpty
-            ? const _NoTasksView()
-            : _TasksListView(todos: todos);
+            ? const _NoTodosView()
+            : _TodosListView(todos: todos);
       },
     );
   }
 }
 
-class _TasksListView extends StatelessWidget {
+class _TodosListView extends StatelessWidget {
   final List<TodoEntity> todos;
 
-  const _TasksListView({required this.todos});
+  const _TodosListView({required this.todos});
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder: (context, index) {
-        return _TasksListItemView(todo: todos[index], index: index);
+        return _TodosListItemView(todo: todos[index], index: index);
       },
       separatorBuilder: (context, index) => const SizedBox(height: 8),
       itemCount: todos.length,
@@ -41,11 +41,11 @@ class _TasksListView extends StatelessWidget {
   }
 }
 
-class _TasksListItemView extends StatelessWidget {
+class _TodosListItemView extends StatelessWidget {
   final TodoEntity todo;
   final int index;
 
-  const _TasksListItemView({required this.todo, required this.index});
+  const _TodosListItemView({required this.todo, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +70,8 @@ class _TasksListItemView extends StatelessWidget {
   }
 }
 
-class _NoTasksView extends StatelessWidget {
-  const _NoTasksView();
+class _NoTodosView extends StatelessWidget {
+  const _NoTodosView();
 
   @override
   Widget build(BuildContext context) {

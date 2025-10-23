@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/src/constants.dart';
-import 'package:flutter_basic/src/home/tasks_view.dart';
+import 'package:flutter_basic/src/home/todos_view.dart';
 import 'package:flutter_basic/src/home_page.dart';
 import 'package:flutter_basic/src/styles.dart';
 
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text(appTitle, style: Styles.title)),
       body: Padding(
         padding: Styles.bodyPadding,
-        child: const TasksView(),
+        child: const TodosView(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
