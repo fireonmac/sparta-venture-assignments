@@ -16,6 +16,14 @@ class _AddTodoViewState extends State<AddTodoView> {
   bool _showDescription = false;
 
   @override
+  void initState() {
+    super.initState();
+    _titleController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
@@ -54,7 +62,6 @@ class _AddTodoViewState extends State<AddTodoView> {
             autofocus: true,
             textInputAction: TextInputAction.done,
             onSubmitted: (_) => save(),
-            onChanged: (_) => setState(() {}),
             decoration: const InputDecoration(
               hintText: "새 할 일",
               border: InputBorder.none,
