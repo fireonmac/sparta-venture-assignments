@@ -88,7 +88,7 @@ class _NoTodosView extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: Styles.cardBorderRadius),
         margin: const EdgeInsets.all(20),
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
