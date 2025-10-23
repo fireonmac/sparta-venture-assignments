@@ -1,8 +1,8 @@
 class TodoEntity {
-  final String title;
-  final String? description;
-  final bool isFavorite;
-  final bool isDone;
+  String title;
+  String? description;
+  bool isFavorite;
+  bool isDone;
 
   TodoEntity({
     required this.title,

@@ -1,20 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/src/constants.dart';
+import 'package:flutter_basic/src/home_page.dart';
+import 'package:flutter_basic/src/todos_provider.dart';
+import 'package:flutter_basic/src/todos_notifier.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final TodosNotifier _todosNotifier = TodosNotifier();
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Tasks',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return TodosProvider(
+      notifier: _todosNotifier,
+      child: MaterialApp(
+        title: appTitle,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: const HomePage(),
       ),
-      home: Scaffold(body: const Text('Tasks')),
     );
   }
 }
