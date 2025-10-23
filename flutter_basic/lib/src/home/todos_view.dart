@@ -58,11 +58,13 @@ class _TodosListItemView extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             todo.isDone ? Icons.check_circle : Icons.radio_button_unchecked,
+            color: todo.isDone ? Styles.secondaryColor[300] : null,
           ),
           onPressed: () => todosNotifier.toggleIsDone(index),
         ),
-        title: Text(todo.title),
+        title: Text(todo.title, style: TextStyle()),
         trailing: IconButton(
+          color: todo.isFavorite ? Styles.accentColor[200] : null,
           icon: Icon(todo.isFavorite ? Icons.star : Icons.star_border),
           onPressed: () => todosNotifier.toggleIsFavorite(index),
         ),
@@ -83,32 +85,39 @@ class _NoTodosView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: Styles.cardBorderRadius),
-        margin: const EdgeInsets.all(20),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            spacing: 20,
-            children: [
-              Image.asset('assets/images/empty.webp', width: 100),
-              const Text(
-                '아직 할 일이 없음',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: Styles.cardBorderRadius,
+            ),
+            margin: const EdgeInsets.all(20),
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                spacing: 20,
+                children: [
+                  Image.asset('assets/images/empty.webp', width: 100),
+                  const Text(
+                    '아직 할 일이 없음',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const Text(
+                    '할 일을 추가하고 $appTitle에 할 일을 추적하세요.',
+                    style: TextStyle(fontSize: 14, height: 1.5),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-              const Text(
-                '할 일을 추가하고 $appTitle에 할 일을 추적하세요.',
-                style: TextStyle(fontSize: 14, height: 1.5),
-                textAlign: TextAlign.center,
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

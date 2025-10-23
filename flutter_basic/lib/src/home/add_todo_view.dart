@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/src/styles.dart';
 import 'package:flutter_basic/src/todos_provider.dart';
 
 class AddTodoView extends StatefulWidget {
@@ -98,6 +99,7 @@ class _AddTodoViewState extends State<AddTodoView> {
                     ),
                   IconButton(
                     icon: Icon(
+                      color: _isFavorite ? Styles.accentColor[200] : null,
                       _isFavorite ? Icons.star : Icons.star_border,
                       size: 24,
                     ),
