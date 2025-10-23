@@ -35,7 +35,7 @@ class _TasksListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return _TasksListItemView(todo: todos[index], index: index);
       },
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (context, index) => const SizedBox(height: 8),
       itemCount: todos.length,
     );
   }

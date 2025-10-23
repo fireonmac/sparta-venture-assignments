@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text(appTitle, style: Styles.title)),
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: Styles.bodyPadding,
         child: const TasksView(),
       ),
       floatingActionButton: FloatingActionButton(
