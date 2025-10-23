@@ -72,7 +72,7 @@ abstract class Styles {
       });
   static const int _accentPrimaryValue = 0xFFD64F00;
 
-  // danger: red
+  // error: red
   static const MaterialColor errorColor =
       MaterialColor(_dangerPrimaryValue, <int, Color>{
         50: Color(0xFFFFEBEE),
