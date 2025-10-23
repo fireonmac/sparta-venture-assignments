@@ -1,0 +1,1 @@
+const appTitle = '현호\'s Tasks';
