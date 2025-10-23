@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/src/todos_provider.dart';
 
-class AddTaskView extends StatefulWidget {
-  const AddTaskView({super.key});
+class AddTodoView extends StatefulWidget {
+  const AddTodoView({super.key});
 
   @override
-  State<AddTaskView> createState() => _AddTaskViewState();
+  State<AddTodoView> createState() => _AddTodoViewState();
 }
 
-class _AddTaskViewState extends State<AddTaskView> {
+class _AddTodoViewState extends State<AddTodoView> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   bool _isFavorite = false;

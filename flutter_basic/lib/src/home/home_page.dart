@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/src/constants.dart';
+import 'package:flutter_basic/src/home/add_todo_view.dart';
 import 'package:flutter_basic/src/home/todos_view.dart';
-import 'package:flutter_basic/src/home_page.dart';
 import 'package:flutter_basic/src/styles.dart';
 
 class HomePage extends StatelessWidget {
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
             builder: (BuildContext context) {
-              return const AddTaskView();
+              return const AddTodoView();
             },
           );
         },
