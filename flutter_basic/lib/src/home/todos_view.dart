@@ -61,7 +61,7 @@ class _TodosListItemView extends StatelessWidget {
           ),
           onPressed: () => todosNotifier.toggleIsDone(index),
         ),
-        title: Text(todo.title, style: TextStyle()),
+        title: Text(todo.title),
         trailing: IconButton(
           icon: Icon(todo.isFavorite ? Icons.star : Icons.star_border),
           onPressed: () => todosNotifier.toggleIsFavorite(index),
