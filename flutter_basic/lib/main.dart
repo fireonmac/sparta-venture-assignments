@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/src/constants.dart';
-import 'package:flutter_basic/src/home_page.dart';
+import 'package:flutter_basic/src/home/home_page.dart';
 import 'package:flutter_basic/src/todos_provider.dart';
 import 'package:flutter_basic/src/todos_notifier.dart';
 
