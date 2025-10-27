@@ -1,0 +1,1 @@
+const appTitle = '엉망진창 벼룩시장';
