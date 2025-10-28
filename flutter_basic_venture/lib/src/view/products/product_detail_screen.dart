@@ -4,11 +4,19 @@ import 'package:flutter_basic_venture/src/styles.dart';
 import 'package:flutter_basic_venture/src/features/products/products_container.dart';
 import 'package:flutter_basic_venture/src/features/cart/cart_container.dart';
 import 'package:flutter_basic_venture/src/widgets/call_to_action_button.dart';
+import 'package:flutter_basic_venture/src/utils/navigation.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String productId;
 
   const ProductDetailScreen({super.key, required this.productId});
+
+  static Route<dynamic> buildRoute(BuildContext context, String productId) {
+    return buildScreenRoute(
+      context,
+      screen: ProductDetailScreen(productId: productId),
+    );
+  }
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();

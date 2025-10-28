@@ -4,6 +4,7 @@ import 'package:flutter_basic_venture/src/features/cart/widgets/cart_button.dart
 import 'package:flutter_basic_venture/src/styles.dart';
 import 'package:flutter_basic_venture/src/features/products/products_container.dart';
 import 'package:flutter_basic_venture/src/features/cart/cart_container.dart';
+import 'package:flutter_basic_venture/src/view/products/product_detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,10 +39,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: ListTile(
                     onTap: () {
-                      Navigator.pushNamed(
+                      Navigator.push(
                         context,
-                        '/products',
-                        arguments: {'productId': product.id},
+                        ProductDetailScreen.buildRoute(context, product.id),
                       );
                     },
                     leading: CircleAvatar(

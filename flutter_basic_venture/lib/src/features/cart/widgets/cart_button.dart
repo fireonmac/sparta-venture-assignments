@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_venture/src/features/cart/cart_container.dart';
+import 'package:flutter_basic_venture/src/view/cart/cart_screen.dart';
 
 class CartButton extends StatelessWidget {
   @override
@@ -12,7 +13,7 @@ class CartButton extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.shopping_cart),
           onPressed: () {
-            Navigator.of(context).pushNamed('/cart');
+            Navigator.push(context, CartScreen.buildRoute(context));
           },
         ),
         Positioned(
