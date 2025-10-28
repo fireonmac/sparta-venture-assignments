@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_venture/src/constants.dart';
+import 'package:flutter_basic_venture/src/features/cart/widgets/cart_button.dart';
 import 'package:flutter_basic_venture/src/styles.dart';
 import 'package:flutter_basic_venture/src/features/products/products_container.dart';
 import 'package:flutter_basic_venture/src/features/cart/cart_container.dart';
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(appTitle, style: Styles.title),
-        actions: [_CartButton()],
+        actions: [CartButton()],
       ),
       body: Padding(
         padding: Styles.bodyPadding,
@@ -36,6 +37,13 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: Styles.cardBorderRadius,
                   ),
                   child: ListTile(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/products',
+                        arguments: {'productId': product.id},
+                      );
+                    },
                     leading: CircleAvatar(
                       backgroundColor: Styles.primaryColor.shade100,
                       child: Text(
@@ -74,51 +82,6 @@ class HomeScreen extends StatelessWidget {
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white, size: 24),
       ),
-    );
-  }
-}
-
-class _CartButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final cartNotifier = CartContainer.of(context);
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/cart');
-          },
-        ),
-        Positioned(
-          right: 6,
-          top: 6,
-          child: ListenableBuilder(
-            listenable: cartNotifier,
-            builder: (context, child) {
-              final count = cartNotifier.items.length;
-              if (count == 0) return const SizedBox.shrink();
-              return Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle,
-                ),
-                child: Text(
-                  '$count',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
     );
   }
 }
