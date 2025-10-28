@@ -32,7 +32,7 @@ class ProductsNotifier with ChangeNotifier {
     return _products.where((product) => product.category == category).toList();
   }
 
-  Product? getProductById(int id) {
+  Product? getProductById(String id) {
     try {
       return _products.firstWhere((product) => product.id == id);
     } catch (e) {

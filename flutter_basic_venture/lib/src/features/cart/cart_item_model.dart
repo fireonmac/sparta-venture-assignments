@@ -1,13 +1,13 @@
 import 'package:flutter_basic_venture/src/features/products/product_model.dart';
 
 class CartItem {
-  final Product product;
+  final String productId;
   int quantity;
 
   CartItem({
-    required this.product,
+    required this.productId,
     this.quantity = 1,
   });
 
-  double get totalPrice => product.price * quantity;
+  double getTotalPrice(Product product) => product.price * quantity;
 }

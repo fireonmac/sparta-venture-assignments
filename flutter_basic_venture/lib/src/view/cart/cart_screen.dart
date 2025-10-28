@@ -7,11 +7,20 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartNotifier = CartContainer.of(context);
-    final count = cartNotifier.items.length;
 
     return Scaffold(
       appBar: AppBar(title: const Text('장바구니')),
-      body: Center(child: Text('장바구니에 담은 아이템 갯수: $count')),
+      body: ListView.builder(
+        itemCount: cartNotifier.items.length,
+        itemBuilder: (context, index) {
+          final cartItem = cartNotifier.items[index];
+          final product = cartNotifier.getProduct(cartItem.productId);
+          return ListTile(
+            title: Text(product?.name ?? '상품 정보가 없습니다.'),
+            subtitle: Text('수량: ${cartItem.quantity}'),
+          );
+        },
+      ),
     );
   }
 }

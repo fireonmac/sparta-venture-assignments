@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final ProductsNotifier _productsNotifier = ProductsNotifier();
-  final CartNotifier _cartNotifier = CartNotifier();
+  late final CartNotifier _cartNotifier = CartNotifier(_productsNotifier);
 
   ThemeData _createTheme(Brightness brightness) {
     return ThemeData(
