@@ -6,6 +6,7 @@ import 'package:flutter_basic_venture/src/features/products/products_notifier.da
 import 'package:flutter_basic_venture/src/features/cart/cart_container.dart';
 import 'package:flutter_basic_venture/src/features/cart/cart_notifier.dart';
 import 'package:flutter_basic_venture/src/view/home/home_screen.dart';
+import 'package:flutter_basic_venture/src/view/cart/cart_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,6 +49,9 @@ class _MyAppState extends State<MyApp> {
           darkTheme: _createTheme(Brightness.dark),
           themeMode: ThemeMode.system,
           home: const HomeScreen(),
+          routes: {
+            '/cart': (context) => const CartScreen(),
+          },
         ),
       ),
     );

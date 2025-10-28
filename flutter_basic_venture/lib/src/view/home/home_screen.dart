@@ -14,7 +14,10 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: const Text(appTitle, style: Styles.title)),
+      appBar: AppBar(
+        title: const Text(appTitle, style: Styles.title),
+        actions: [_CartButton()],
+      ),
       body: Padding(
         padding: Styles.bodyPadding,
         child: ListenableBuilder(
@@ -71,6 +74,51 @@ class HomeScreen extends StatelessWidget {
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white, size: 24),
       ),
+    );
+  }
+}
+
+class _CartButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final cartNotifier = CartContainer.of(context);
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.shopping_cart),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/cart');
+          },
+        ),
+        Positioned(
+          right: 6,
+          top: 6,
+          child: ListenableBuilder(
+            listenable: cartNotifier,
+            builder: (context, child) {
+              final count = cartNotifier.items.length;
+              if (count == 0) return const SizedBox.shrink();
+              return Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  '$count',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
