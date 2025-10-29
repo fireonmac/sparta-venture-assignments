@@ -5,6 +5,7 @@ import 'package:flutter_basic_venture/src/features/products/products_container.d
 import 'package:flutter_basic_venture/src/features/cart/cart_container.dart';
 import 'package:flutter_basic_venture/src/widgets/call_to_action_button.dart';
 import 'package:flutter_basic_venture/src/utils/navigation.dart';
+import 'package:flutter_basic_venture/src/widgets/quantity_control.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String productId;
@@ -135,7 +136,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.shade300,
               spreadRadius: 1,
               blurRadius: 5,
               offset: const Offset(0, -2),
@@ -154,37 +155,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     '수량',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: _quantity > 1
-                            ? () => setState(() => _quantity--)
-                            : null,
-                        icon: const Icon(Icons.remove),
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.grey.shade200,
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          '$_quantity',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () => setState(() => _quantity++),
-                        icon: const Icon(Icons.add),
-                        style: IconButton.styleFrom(
-                          backgroundColor: Styles.primaryColor.shade100,
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                    ],
+                  QuantityControl(
+                    quantity: _quantity,
+                    onIncrement: () => setState(() => _quantity++),
+                    onDecrement: () => setState(() => _quantity--),
                   ),
                 ],
               ),
