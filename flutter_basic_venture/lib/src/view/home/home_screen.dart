@@ -5,6 +5,7 @@ import 'package:flutter_basic_venture/src/styles.dart';
 import 'package:flutter_basic_venture/src/features/products/products_container.dart';
 import 'package:flutter_basic_venture/src/features/cart/cart_container.dart';
 import 'package:flutter_basic_venture/src/view/products/product_detail_screen.dart';
+import 'package:flutter_basic_venture/src/view/products/product_create_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -78,7 +79,12 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Styles.primaryColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            ProductCreateScreen.buildRoute(context),
+          );
+        },
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white, size: 24),
       ),
