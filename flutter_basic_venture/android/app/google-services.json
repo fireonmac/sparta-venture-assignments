@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "305727623385",
+    "project_id": "messy-flea-market",
+    "storage_bucket": "messy-flea-market.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305727623385:android:c7ea010d7d6eb267186ec8",
+        "android_client_info": {
+          "package_name": "com.example.flutter_basic_venture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305727623385-jo0f4t0vpjs5lk8tm2sdfio208g89bkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIUdiY_FlpwNgdkbcvsg3d15G-fj7yU4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305727623385-jo0f4t0vpjs5lk8tm2sdfio208g89bkg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "305727623385-qbjdmv31v0ejfmv1pomfe28q6p190ob4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterBasicVenture"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
