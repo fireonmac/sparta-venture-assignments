@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_venture/src/features/products/product_model.dart';
 import 'package:flutter_basic_venture/src/features/products/products_container.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_basic_venture/src/styles.dart';
 import 'package:flutter_basic_venture/src/utils/navigation.dart';
 import 'package:flutter_basic_venture/src/widgets/call_to_action_button.dart';
 import 'package:flutter_basic_venture/src/widgets/quantity_control.dart';
+import 'package:flutter_basic_venture/src/widgets/image_picker_bottom_sheet.dart';
 
 class ProductCreateScreen extends StatefulWidget {
   const ProductCreateScreen({super.key});
@@ -22,6 +24,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
   final _descriptionController = TextEditingController();
   final _priceController = TextEditingController();
   int _stockQuantity = 1;
+  File? _selectedImage;
 
   @override
   void dispose() {
@@ -45,6 +48,29 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
     });
   }
 
+  Future<void> _pickImage() async {
+    try {
+      await showModalBottomSheet(
+        context: context,
+        builder: (context) => ImagePickerBottomSheet(
+          onImageSelected: (pickedFile) {
+            if (pickedFile != null) {
+              setState(() {
+                _selectedImage = pickedFile;
+              });
+            }
+          },
+        ),
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('이미지 선택 실패: $e')));
+      }
+    }
+  }
+
   void _createProduct(BuildContext context) {
     final name = _nameController.text.trim();
     final description = _descriptionController.text.trim();
@@ -54,6 +80,13 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('모든 필드를 입력해주세요.')));
+      return;
+    }
+
+    if (_selectedImage == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('사진을 선택해주세요.')));
       return;
     }
 
@@ -72,8 +105,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
       description: description,
       price: price,
       stock: _stockQuantity,
-      imageUrl:
-          'https://via.placeholder.com/300x300/9C27B0/FFFFFF?text=${Uri.encodeComponent(name)}',
+      imageUrl: _selectedImage!.path,
       category: '기타',
     );
 
@@ -108,20 +140,52 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
             children: [
               _buildSectionTitle('물건 사진'),
               GestureDetector(
-                onTap: () {},
+                onTap: _pickImage,
                 child: Container(
                   height: 200,
                   width: double.infinity,
+                  clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
-                    border: Border.all(),
+                    border: _selectedImage == null ? Border.all() : null,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Stack(
+                    fit: StackFit.expand,
                     children: [
-                      Icon(Icons.add_a_photo_outlined),
-                      const SizedBox(height: 8),
-                      Text('터치해서 사진 추가'),
+                      _selectedImage != null
+                          ? Image.file(_selectedImage!, fit: BoxFit.cover)
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.add_a_photo_outlined),
+                                const SizedBox(height: 8),
+                                Text('터치해서 사진 추가'),
+                              ],
+                            ),
+                      if (_selectedImage != null)
+                        Positioned(
+                          top: 8,
+                          right: 8,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _selectedImage = null;
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                shape: BoxShape.circle,
+                              ),
+                              padding: const EdgeInsets.all(4),
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
