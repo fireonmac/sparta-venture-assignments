@@ -5,7 +5,7 @@ abstract class Styles {
   // @ text
   // ************************************************
   static const bold = TextStyle(fontWeight: FontWeight.bold);
-  static const title = TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold);
+  static const title = TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold);
 
   // ************************************************
   // @ padding
