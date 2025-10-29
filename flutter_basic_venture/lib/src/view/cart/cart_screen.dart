@@ -41,9 +41,9 @@ class CartScreen extends StatelessWidget {
                     ),
                   )
                 else
-                  ...(cartNotifier.items).map((cartItem) {
-                    return CartListItem(productId: cartItem.productId);
-                  }).toList(),
+                  ...(cartNotifier.items).map(
+                    (cartItem) => CartListItem(productId: cartItem.productId),
+                  ),
               ],
             ),
           );
@@ -86,8 +86,10 @@ class CartScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: CallToActionButton(
-                      text: '전부 구매하기',
-                      onPressed: cartNotifier.isEmpty ? null : () {},
+                      text: '전부 챙겨가기',
+                      onPressed: cartNotifier.isEmpty ? null : () {
+                        // @TODO 
+                      },
                     ),
                   ),
                 ],

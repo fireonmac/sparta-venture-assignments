@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_venture/src/features/products/product_model.dart';
+import 'package:flutter_basic_venture/src/features/products/products_container.dart';
 import 'package:flutter_basic_venture/src/styles.dart';
 import 'package:flutter_basic_venture/src/utils/navigation.dart';
 import 'package:flutter_basic_venture/src/widgets/call_to_action_button.dart';
+import 'package:flutter_basic_venture/src/widgets/quantity_control.dart';
 
 class ProductCreateScreen extends StatefulWidget {
   const ProductCreateScreen({super.key});
@@ -15,6 +18,74 @@ class ProductCreateScreen extends StatefulWidget {
 }
 
 class _ProductCreateScreenState extends State<ProductCreateScreen> {
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _priceController = TextEditingController();
+  int _stockQuantity = 1;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _descriptionController.dispose();
+    _priceController.dispose();
+    super.dispose();
+  }
+
+  void _incrementQuantity() {
+    setState(() {
+      _stockQuantity++;
+    });
+  }
+
+  void _decrementQuantity() {
+    setState(() {
+      if (_stockQuantity > 1) {
+        _stockQuantity--;
+      }
+    });
+  }
+
+  void _createProduct(BuildContext context) {
+    final name = _nameController.text.trim();
+    final description = _descriptionController.text.trim();
+    final priceText = _priceController.text.trim();
+
+    if (name.isEmpty || description.isEmpty || priceText.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('모든 필드를 입력해주세요.')));
+      return;
+    }
+
+    final price = double.tryParse(priceText);
+    if (price == null || price <= 0) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('올바른 가격을 입력해주세요.')));
+      return;
+    }
+
+    final productsNotifier = ProductsContainer.of(context);
+    final newProduct = Product(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      name: name,
+      description: description,
+      price: price,
+      stock: _stockQuantity,
+      imageUrl:
+          'https://via.placeholder.com/300x300/9C27B0/FFFFFF?text=${Uri.encodeComponent(name)}',
+      category: '기타',
+    );
+
+    productsNotifier.add(newProduct);
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('$name 상품이 등록되었습니다!')));
+
+    Navigator.of(context).pop();
+  }
+
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
@@ -58,11 +129,15 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
               const SizedBox(height: 24),
 
               _buildSectionTitle('던질 물건'),
-              TextField(decoration: InputDecoration(hintText: '예: 한쪽만 남은 양말')),
+              TextField(
+                controller: _nameController,
+                decoration: InputDecoration(hintText: '예: 한쪽만 남은 양말'),
+              ),
               const SizedBox(height: 24),
 
               _buildSectionTitle('버려진 이유'),
               TextField(
+                controller: _descriptionController,
                 maxLines: 5,
                 decoration: InputDecoration(
                   hintText: '이 물건에 얽힌 눈물 나는 이야기를 적어주세요...',
@@ -72,19 +147,32 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
 
               _buildSectionTitle('판매 가격 (단위: 조약돌)'),
               TextField(
+                controller: _priceController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: '조약돌 갯수 입력',
                   suffixIcon: Icon(Icons.diamond),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
 
-              SizedBox(
-                width: double.infinity,
-                child: CallToActionButton(text: '엉망진창 벼룩시장에 내던지기!'),
+              _buildSectionTitle('재고 수량'),
+              QuantityControl(
+                quantity: _stockQuantity,
+                onIncrement: _incrementQuantity,
+                onDecrement: _decrementQuantity,
               ),
+              const SizedBox(height: 32),
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: Styles.bodyPadding,
+          child: CallToActionButton(
+            text: '엉망진창 벼룩시장에 내던지기!',
+            onPressed: () => _createProduct(context),
           ),
         ),
       ),
