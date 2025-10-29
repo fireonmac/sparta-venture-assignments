@@ -9,7 +9,9 @@ class ProductsNotifier with ChangeNotifier {
       name: '꼬질꼬질 발냄새나는 신발',
       description: '3년 신고 한 번도 안빨았다고 합니다.',
       price: 100,
-      imageUrl: 'https://via.placeholder.com/300x300/7B68EE/FFFFFF?text=AirPods+Pro',
+      stock: 1,
+      imageUrl:
+          'https://via.placeholder.com/300x300/7B68EE/FFFFFF?text=AirPods+Pro',
       category: '의류',
     ),
     Product(
@@ -17,7 +19,9 @@ class ProductsNotifier with ChangeNotifier {
       name: '목 늘어난 난닝구',
       description: '목이 너무 늘어나서 목 사이로 볼링공도 쏙 들어가겠어요!',
       price: 400,
-      imageUrl: 'https://via.placeholder.com/300x300/FF1744/FFFFFF?text=Nike+AF1',
+      stock: 0,
+      imageUrl:
+          'https://via.placeholder.com/300x300/FF1744/FFFFFF?text=Nike+AF1',
       category: '의류',
     ),
   ];

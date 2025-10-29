@@ -5,6 +5,7 @@ class Product {
   final double price;
   final String imageUrl;
   final String category;
+  final int stock;
 
   Product({
     required this.id,
@@ -13,5 +14,8 @@ class Product {
     required this.price,
     required this.imageUrl,
     required this.category,
+    this.stock = 1,
   });
+
+  bool get isSoldOut => stock <= 0;
 }
