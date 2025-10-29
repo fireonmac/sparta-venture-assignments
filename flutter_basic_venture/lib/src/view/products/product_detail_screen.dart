@@ -30,13 +30,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     final productsNotifier = ProductsContainer.of(context);
     final cartNotifier = CartContainer.of(context);
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
 
     final product = productsNotifier.getProductById(widget.productId);
 
     if (product == null) {
       return Scaffold(
         appBar: AppBar(title: const Text('상품을 찾을 수 없습니다')),
-        body: const Center(child: Text('존재하지 않는 상품입니다.')),
+        body: Center(
+          child: Text(
+            '존재하지 않는 상품입니다.',
+            style: TextStyle(color: colorScheme.onSurface),
+          ),
+        ),
       );
     }
 
@@ -53,13 +60,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 width: double.infinity,
                 height: 300,
                 decoration: BoxDecoration(
-                  color: Styles.primaryColor.shade100,
+                  color: colorScheme.primaryContainer,
                   borderRadius: Styles.cardBorderRadius,
                 ),
                 child: Icon(
                   Icons.image,
                   size: 100,
-                  color: Styles.primaryColor.shade200,
+                  color: colorScheme.onPrimaryContainer.withOpacity(0.5),
                 ),
               ),
 
@@ -68,9 +75,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               // 상품명
               Text(
                 product.name,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
                 ),
               ),
 
@@ -83,13 +91,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: Styles.primaryColor.shade100,
+                  color: colorScheme.primaryContainer,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   product.category,
                   style: TextStyle(
-                    color: Styles.primaryColor.shade700,
+                    color: colorScheme.onPrimaryContainer,
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
@@ -99,13 +107,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               const SizedBox(height: 16),
 
               // 가격
-              Text(
-                '₩${product.price.toStringAsFixed(0)}',
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
+              Row(
+                children: [
+                  Icon(Icons.diamond, color: Styles.primaryColor, size: 28),
+                  const SizedBox(width: 4.0),
+                  Text(
+                    '${product.price.toStringAsFixed(0)}개',
+                    style: TextStyle(
+                      color: Styles.primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                    ),
+                  ),
+                ],
               ),
 
               const SizedBox(height: 24),
@@ -113,15 +127,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               // 상품 설명
               Text(
                 '상품 설명',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
                 product.description,
-                style: const TextStyle(fontSize: 16, height: 1.5),
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ),
 
               // 하단 여백
@@ -133,10 +152,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colorScheme.surface,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade300,
+              color: colorScheme.shadow.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 5,
               offset: const Offset(0, -2),
@@ -151,9 +170,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     '수량',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   QuantityControl(
                     quantity: _quantity,
@@ -163,23 +186,34 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ],
               ),
 
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
 
               // 총 가격
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    '총 가격',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
                   Text(
-                    '₩${(product.price * _quantity).toStringAsFixed(0)}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                    '총 가격',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: colorScheme.onSurface,
                     ),
+                  ),
+
+                  Row(
+                    children: [
+                      Icon(Icons.diamond, color: Styles.primaryColor, size: 20),
+                      const SizedBox(width: 4.0),
+                      Text(
+                        '${product.price.toStringAsFixed(0)}개',
+                        style: TextStyle(
+                          color: Styles.primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -196,8 +230,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     SnackBar(
                       content: Text(
                         '${product.name} $_quantity개가 장바구니에 추가되었습니다.',
+                        style: TextStyle(color: colorScheme.onInverseSurface),
                       ),
-                      backgroundColor: Styles.primaryColor,
+                      backgroundColor: colorScheme.inverseSurface,
                       duration: const Duration(seconds: 2),
                     ),
                   );
