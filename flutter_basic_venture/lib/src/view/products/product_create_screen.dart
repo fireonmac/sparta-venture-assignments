@@ -57,11 +57,11 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
               ),
               const SizedBox(height: 24),
 
-              _buildSectionTitle('물건 이름'),
+              _buildSectionTitle('던질 물건'),
               TextField(decoration: InputDecoration(hintText: '예: 한쪽만 남은 양말')),
               const SizedBox(height: 24),
 
-              _buildSectionTitle('물건 설명'),
+              _buildSectionTitle('버려진 이유'),
               TextField(
                 maxLines: 5,
                 decoration: InputDecoration(
@@ -74,8 +74,8 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
               TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  hintText: '숫자만 입력',
-                  suffixIcon: Icon(Icons.sunny),
+                  hintText: '조약돌 갯수 입력',
+                  suffixIcon: Icon(Icons.diamond),
                 ),
               ),
               const SizedBox(height: 32),

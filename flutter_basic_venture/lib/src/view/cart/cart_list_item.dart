@@ -35,7 +35,8 @@ class CartListItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.0),
                     child: AspectRatio(
                       aspectRatio: 1.0,
-                      child: (product?.imageUrl != null &&
+                      child:
+                          (product?.imageUrl != null &&
                               product!.imageUrl.isNotEmpty)
                           ? Image.network(
                               product.imageUrl,
@@ -44,7 +45,8 @@ class CartListItem extends StatelessWidget {
                                 return progress == null
                                     ? child
                                     : const Center(
-                                        child: CircularProgressIndicator());
+                                        child: CircularProgressIndicator(),
+                                      );
                               },
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
@@ -87,16 +89,12 @@ class CartListItem extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(
-                        Icons.sunny,
-                        size: 16,
-                        color: colorScheme.primary,
-                      ),
+                      Icon(Icons.diamond, size: 16, color: colorScheme.primary),
                       const SizedBox(width: 4),
                       Text(
-                        (product?.price ?? 0).toInt().toString(),
+                        '${(product?.price ?? 0).toInt().toString()}개',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: colorScheme.primary,
                         ),

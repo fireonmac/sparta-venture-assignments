@@ -71,10 +71,10 @@ class CartScreen extends StatelessWidget {
                         child: Text('|', style: TextStyle(fontSize: 16)),
                       ),
                       const Text('합계: ', style: TextStyle(fontSize: 16)),
-                      Icon(Icons.sunny, size: 16),
+                      Icon(Icons.diamond, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        cartNotifier.totalPrice.toInt().toString(),
+                        '${cartNotifier.totalPrice.toInt().toString()}개',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
