@@ -1,16 +1,23 @@
-# flutter_basic_venture
+# 🌟 엉망진창 벼룩시장
+"이걸 돈 받고 팔긴 미안한데... 버리긴 아깝네."
+쓸모없는 물건을 쓸모없는 '조약돌'로 교환하는 중고(?) 거래 플랫폼입니다.
 
-A new Flutter project.
+## 🎯 프로젝트 컨셉
+- 핵심 아이디어: 쓸모없는 물건을 버리지 않고 팔아볼까요. 근데 누가 살까요. 화폐도 길에서 주운 **'조약돌'**처럼 쓸모없는 것으로 사고 팔아 봅시다.
+- 가치: 필요 없는 물건을 그냥 쓰레기로 버리지 않고 교환하는 과정 속에서 일상의 소소한 재미를 찾습니다.
 
-## Getting Started
+## ✨ 주요 기능
+### ✅ 현재 구현된 기능
+- 상품 목록 확인
+- 상품 상세 페이지 조회
+- 장바구니 (담기/수량 변경)
 
-This project is a starting point for a Flutter application.
+### 🚧 추후 구현 예정 (Roadmap)
+- 구매 기능: '조약돌'을 사용하여 실제 구매 로직 구현
+- 구매 내역: 나의 '쓸모없는' 구매 내역 확인
+- 상품 관리: 내가 등록한 상품 정보 수정
+- [핵심] 조약돌 경매 기능: 정말 쓸모없는 물건을 유저들과 턱도 없이 비싼 가격(조약돌)에 사거나 파는 순간의 쾌감
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏗️ 프로젝트 구조
+### 🔄 상태 관리 방식
+대다수 라이브러리(Provider, Riverpod 등)에서 내부적으로 활용되는 Flutter의 핵심 위젯 **InheritedWidget**과 **ChangeNotifier**를 직접 조합하여 전역 상태 관리 방식을 적용했습니다. 이를 통해 라이브러리 의존성을 줄이고, Flutter의 동작 원리에 대한 이해를 바탕으로 최적화된 상태 관리를 구현합니다.
