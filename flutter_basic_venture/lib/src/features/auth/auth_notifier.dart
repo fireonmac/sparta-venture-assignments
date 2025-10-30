@@ -28,6 +28,11 @@ class AuthNotifier with ChangeNotifier {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn.instance.signOut();
+  }
+
   bool get isInitialized => _isInitialized;
 
   User? get user => _user;
