@@ -1,13 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_venture/firebase_options.dart';
 import 'package:flutter_basic_venture/src/constants.dart';
+import 'package:flutter_basic_venture/src/features/auth/auth_guard.dart';
 import 'package:flutter_basic_venture/src/styles.dart';
 import 'package:flutter_basic_venture/src/features/products/products_container.dart';
 import 'package:flutter_basic_venture/src/features/products/products_notifier.dart';
 import 'package:flutter_basic_venture/src/features/cart/cart_container.dart';
 import 'package:flutter_basic_venture/src/features/cart/cart_notifier.dart';
+import 'package:flutter_basic_venture/src/features/auth/auth_container.dart';
+import 'package:flutter_basic_venture/src/features/auth/auth_notifier.dart';
+import 'package:flutter_basic_venture/src/view/auth/login_screen.dart';
 import 'package:flutter_basic_venture/src/view/home/home_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
@@ -19,6 +29,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final AuthNotifier _authNotifier = AuthNotifier();
   final ProductsNotifier _productsNotifier = ProductsNotifier();
   late final CartNotifier _cartNotifier = CartNotifier(_productsNotifier);
 
@@ -38,16 +49,22 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ProductsContainer(
-      notifier: _productsNotifier,
-      child: CartContainer(
-        notifier: _cartNotifier,
-        child: MaterialApp(
-          title: appTitle,
-          theme: _createTheme(Brightness.light),
-          darkTheme: _createTheme(Brightness.dark),
-          themeMode: ThemeMode.system,
-          home: const HomeScreen(),
+    return AuthContainer(
+      notifier: _authNotifier,
+      child: ProductsContainer(
+        notifier: _productsNotifier,
+        child: CartContainer(
+          notifier: _cartNotifier,
+          child: MaterialApp(
+            title: appTitle,
+            theme: _createTheme(Brightness.light),
+            darkTheme: _createTheme(Brightness.dark),
+            themeMode: ThemeMode.system,
+            home: const AuthGuard(
+              onAuthFailure: LoginScreen(),
+              onAuthSuccess: HomeScreen(),
+            ),
+          ),
         ),
       ),
     );
